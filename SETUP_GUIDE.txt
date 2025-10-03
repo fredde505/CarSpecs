@@ -1,0 +1,184 @@
+-- SetupGuide.txt
+-- Complete setup guide for implementing the Roblox Party Game
+
+=============================================================================
+ROBLOX PARTY GAME - SETUP GUIDE
+=============================================================================
+
+This guide will walk you through setting up the party game in Roblox Studio.
+
+-----------------------------------------------------------------------------
+STEP 1: CREATE REMOTE EVENT
+-----------------------------------------------------------------------------
+
+1. Open your Roblox place in Roblox Studio
+2. In the Explorer, find "ReplicatedStorage"
+3. Right-click ReplicatedStorage → Insert Object → RemoteEvent
+4. Name it exactly: "PortalEvent"
+5. This allows communication between server and client scripts
+
+-----------------------------------------------------------------------------
+STEP 2: ADD PORTAL MODULE
+-----------------------------------------------------------------------------
+
+1. In Explorer, find "ReplicatedStorage"
+2. Right-click ReplicatedStorage → Insert Object → ModuleScript
+3. Rename it to: "Portal"
+4. Double-click to open the script
+5. Delete all existing code
+6. Copy the entire contents of: src/shared/modules/Portal.lua
+7. Paste into the Portal ModuleScript
+8. Press Ctrl+S to save
+
+-----------------------------------------------------------------------------
+STEP 3: ADD SERVER SCRIPTS
+-----------------------------------------------------------------------------
+
+A. GameManager Script:
+1. In Explorer, find "ServerScriptService"
+2. Right-click ServerScriptService → Insert Object → Script
+3. Rename it to: "GameManager"
+4. Open the script and delete existing code
+5. Copy contents from: src/server/GameManager.lua
+6. Paste and save (Ctrl+S)
+
+B. LobbySetup Script:
+1. In ServerScriptService, right-click → Insert Object → Script
+2. Rename it to: "LobbySetup"
+3. Open, delete existing code
+4. Copy contents from: src/server/LobbySetup.lua
+5. Paste and save (Ctrl+S)
+
+-----------------------------------------------------------------------------
+STEP 4: ADD CLIENT SCRIPTS
+-----------------------------------------------------------------------------
+
+A. GameUI LocalScript:
+1. In Explorer, find "StarterPlayer"
+2. Expand it and find "StarterPlayerScripts"
+   (If StarterPlayerScripts doesn't exist, right-click StarterPlayer → 
+    Insert Object → Folder, rename to "StarterPlayerScripts")
+3. Right-click StarterPlayerScripts → Insert Object → LocalScript
+4. Rename it to: "GameUI"
+5. Open, delete existing code
+6. Copy contents from: src/client/GameUI.lua
+7. Paste and save (Ctrl+S)
+
+B. PortalClient LocalScript:
+1. In StarterPlayerScripts, right-click → Insert Object → LocalScript
+2. Rename it to: "PortalClient"
+3. Open, delete existing code
+4. Copy contents from: src/client/PortalClient.lua
+5. Paste and save (Ctrl+S)
+
+-----------------------------------------------------------------------------
+STEP 5: VERIFY STRUCTURE
+-----------------------------------------------------------------------------
+
+Your Explorer should now look like this:
+
+📁 Workspace
+   (Scripts will create lobby and portals here automatically)
+
+📁 ReplicatedStorage
+   📄 PortalEvent (RemoteEvent)
+   📜 Portal (ModuleScript)
+
+📁 ServerScriptService
+   📜 GameManager (Script)
+   📜 LobbySetup (Script)
+
+📁 StarterPlayer
+   📁 StarterPlayerScripts
+      📜 GameUI (LocalScript)
+      📜 PortalClient (LocalScript)
+
+-----------------------------------------------------------------------------
+STEP 6: TEST THE GAME
+-----------------------------------------------------------------------------
+
+1. Make sure all scripts are saved
+2. Click the "Play" button at the top (or press F5)
+3. You should see:
+   - A lobby being created with spawn point
+   - Walls around the lobby
+   - Three portals appearing (red, green, yellow)
+   - UI at the top of your screen
+   - Stats panel on the left
+
+4. Walk up to any portal
+5. Press 'E' (or click) when the ProximityPrompt appears
+6. You should see a notification
+
+-----------------------------------------------------------------------------
+STEP 7: TROUBLESHOOTING
+-----------------------------------------------------------------------------
+
+If portals don't appear:
+- Check Output window (View → Output) for error messages
+- Make sure Portal module is in ReplicatedStorage
+- Verify all scripts are in the correct locations
+- Check that script names match exactly (case-sensitive)
+
+If UI doesn't appear:
+- Make sure GameUI is a LocalScript (not Script)
+- Check it's in StarterPlayerScripts
+- Look for errors in Output window
+
+If you get "PortalEvent not found" error:
+- Make sure you created the RemoteEvent in ReplicatedStorage
+- Name must be exactly "PortalEvent"
+
+If scripts don't run:
+- Check that Server scripts are in ServerScriptService
+- Check that Client scripts are LocalScripts in StarterPlayerScripts
+- Make sure "Allow Studio Access to API Services" is enabled in 
+  Game Settings → Security
+
+-----------------------------------------------------------------------------
+STEP 8: CUSTOMIZATION
+-----------------------------------------------------------------------------
+
+To change portal positions:
+- Open LobbySetup.lua
+- Find the portalConfigs table
+- Modify Position values (Vector3.new(x, y, z))
+
+To change portal colors:
+- In portalConfigs, modify Color values
+- Use Color3.fromRGB(red, green, blue)
+- Values range from 0-255
+
+To add more portals:
+- Add new entries to portalConfigs table in LobbySetup.lua
+- Follow the same format as existing portals
+
+To change lobby size:
+- In LobbySetup.lua, find CreateLobbyWalls function
+- Modify the lobbySize variable (default: 100)
+
+-----------------------------------------------------------------------------
+STEP 9: NEXT STEPS
+-----------------------------------------------------------------------------
+
+Now that the basic structure is set up, you can:
+
+1. Create minigame areas in Workspace
+2. Implement teleportation logic
+3. Add minigame-specific scripts
+4. Create scoring systems
+5. Add more visual effects
+6. Implement team systems
+
+See ROBLOX_README.md for architecture details and development guidelines.
+
+-----------------------------------------------------------------------------
+SUPPORT
+-----------------------------------------------------------------------------
+
+For issues or questions:
+- Check the Output window for error messages
+- Review ROBLOX_README.md for architecture details
+- Make sure all file names and locations match exactly
+
+=============================================================================
